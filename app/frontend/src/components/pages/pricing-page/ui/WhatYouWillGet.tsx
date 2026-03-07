@@ -1,4 +1,4 @@
-import { Title, Text, Stack, Flex, ThemeIcon, Card } from "@mantine/core";
+import { Title, Text, Stack, Flex, ThemeIcon} from "@mantine/core";
 import { featuresData, type FeatureCardData } from "../api/data";
 
 interface FeatureCardProps {
@@ -11,26 +11,25 @@ const FeatureCard: React.FC<FeatureCardProps> = (props) => {
  const Icon = props.icon;
 
  return (
-  <Card
-   padding="lg"
-   radius="md"
-   shadow="sm"
+  <Flex
+   p="lg"
+   bdrs="md"
    bg="#0A192F"
-   style={{
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    textAlign: "center",
-    width: "300px",
-    margin: "10px",
-   }}
+   direction="column"
+   align="center"
+   ta="center"
+   w="300px"
+   m={10}
+   
   >
    <ThemeIcon
     color="#1b5b6b"
     size="xl"
     radius="xl"
     mb="20px"
-    style={{ width: "40px", height: "40px", padding: "5px" }}
+    w="40px"
+    h="40px"
+    p="5px"
    >
     <Icon color="#4ECDC4" />
    </ThemeIcon>
@@ -38,7 +37,7 @@ const FeatureCard: React.FC<FeatureCardProps> = (props) => {
     {props.title}
    </Text>
    <Text c="dimmed">{props.description}</Text>
-  </Card>
+  </Flex>
  );
 };
 
@@ -50,7 +49,9 @@ const WhatYouWillGet = () => {
    pt="25px"
    pb="40px"
    bg="#0A192F"
-   style={{ maxWidth: "1120px", width: "100%", borderRadius: "8px" }}
+   maw="1120px"
+   w="100%"
+   bdrs={8}
   >
    <Title order={2} c="white" ta="center">
     {" "}

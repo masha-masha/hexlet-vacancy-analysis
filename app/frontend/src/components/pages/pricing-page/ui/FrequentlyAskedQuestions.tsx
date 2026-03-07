@@ -1,11 +1,4 @@
-import {
- Title,
- Text,
- Flex,
- ThemeIcon,
- Card,
- Container,
-} from "@mantine/core";
+import { Title, Text, Flex, ThemeIcon, Card, Container } from "@mantine/core";
 import { QuestionMarkCircleIcon } from "@heroicons/react/24/outline";
 import { faqData } from "../api/data";
 
@@ -21,11 +14,9 @@ export const FaqCard: React.FC<FaqCardProps> = (props) => {
    padding="lg"
    radius="md"
    withBorder
-   style={{
-    width: "450px",
-    borderColor: "#e0e0e0",
-    backgroundColor: "white",
-   }}
+   w="450px"
+   bg="white"
+   bd="1px solid #e0e0e0"
   >
    <Flex gap="5px">
     <ThemeIcon color="#4ECDC4" variant="light" radius="xl" size="md">
@@ -35,14 +26,12 @@ export const FaqCard: React.FC<FaqCardProps> = (props) => {
      {props.question}
     </Text>
    </Flex>
-   <Text size="sm" c="dimmed" style={{ paddingLeft: "32px" }}>
+   <Text size="sm" c="dimmed" pl="32px">
     {props.answer}
    </Text>
   </Card>
  );
 };
-
-
 
 const FrequentlyAskedQuestions = () => {
  return (
@@ -50,7 +39,7 @@ const FrequentlyAskedQuestions = () => {
    <Title order={2} ta="center" mb="xl" c="dark">
     Часто задаваемые вопросы
    </Title>
-   
+
    <Flex gap="20px" wrap="wrap">
     {faqData.map((item) => (
      <FaqCard
@@ -63,6 +52,5 @@ const FrequentlyAskedQuestions = () => {
   </Container>
  );
 };
-
 
 export default FrequentlyAskedQuestions;

@@ -25,10 +25,9 @@ interface PricingCardProps {
 }
 
 const PricingCard = (props: PricingCardProps) => {
- 
-// Предполагается, что данные о популярном тарифе приходят с бекенда, например, по ключу "highlight". 
-// Пока данных нет, используется вспомогательная функция isPopularPlan, 
-// чтобы один из тарифов отображать с бейджом "Популярный" и зеленой рамкой
+ // Предполагается, что данные о популярном тарифе приходят с бекенда, например, по ключу "highlight".
+ // Пока данных нет, используется вспомогательная функция isPopularPlan,
+ // чтобы один из тарифов отображать с бейджом "Популярный" и зеленой рамкой
 
  const isPopularPlan = (name: string) => name === "Профи";
 
@@ -44,28 +43,26 @@ const PricingCard = (props: PricingCardProps) => {
   <Paper
    p="xl"
    radius="lg"
-   style={{
-    border: cardBorder,
-    position: "relative",
-    display: "flex",
-    flex: 1,
-    minWidth: "280px",
-    maxWidth: "350px",
-    backgroundColor: "white",
-   }}
+   bd={cardBorder}
+   display="flex"
+   pos="relative"
+   flex={1}
+   bg="white"
+   miw="280px"
+   maw="350px"
   >
    {popularPlan && (
     <Badge
      color="#4ECDC4"
      variant="filled"
      radius="xl"
-     style={{
-      position: "absolute",
-      top: "-10px",
-      left: "50%",
-      transform: "translateX(-50%)",
-      padding: "10px",
-     }}
+     pos="absolute"
+     top="-10px"
+     left={0}
+     right={0}
+     mx="auto"
+     w="fit-content"
+     p="10px"
     >
      Популярный
     </Badge>
@@ -85,12 +82,7 @@ const PricingCard = (props: PricingCardProps) => {
      /{props.period}
     </Text>
 
-    <Stack
-     gap="xs"
-     mt="md"
-     w="100%"
-     style={{ flexGrow: 1, alignSelf: "stretch" }}
-    >
+    <Stack gap="xs" mt="md" w="100%" flex={1} align="stretch">
      {props.features.map((feature, index) => (
       <Group key={index} wrap="nowrap" align="flex-start" w="100%">
        <ThemeIcon size="sm" radius="xl" color="#4ECDC4" variant="light">
@@ -106,9 +98,9 @@ const PricingCard = (props: PricingCardProps) => {
     <Button
      fullWidth
      mt="auto"
-     color={buttonBackGroundColor}
+     bg={buttonBackGroundColor}
      radius="md"
-     style={{ color: buttonColor }}
+     c={buttonColor}
     >
      Выбрать план
     </Button>
