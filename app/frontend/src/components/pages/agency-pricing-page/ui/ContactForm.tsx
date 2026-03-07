@@ -17,15 +17,15 @@ const phoneRegExp = /^\+7(?:[()\s-]*\d){10}$/;
 const contactFormSchema = yup.object().shape({
  companyName: yup
   .string()
-  .min(3, 'Название компании должно содержать не менее 3 символов')
-  .max(100, 'Название компании не должно превышать 100 символов')
+  .min(3, "Название компании должно содержать не менее 3 символов")
+  .max(100, "Название компании не должно превышать 100 символов")
   .required('Поле "Название компании" обязательно для заполнения'),
 
  fullName: yup
-   .string()
-   .min(3, 'Ваше имя должно содержать не менее 3 символов')
-   .max(100, 'Ваше имя не должно превышать 100 символов')
-   .required('Поле "Ваше имя" обязательно для заполнения'),
+  .string()
+  .min(3, "Ваше имя должно содержать не менее 3 символов")
+  .max(100, "Ваше имя не должно превышать 100 символов")
+  .required('Поле "Ваше имя" обязательно для заполнения'),
 
  email: yup
   .string()
@@ -33,12 +33,9 @@ const contactFormSchema = yup.object().shape({
   .required('Поле "Email" обязательно для заполнения'),
 
  phone: yup
-   .string()
-   .required('Поле "Телефон" обязательно для заполнения')
-   .matches(
-      phoneRegExp,
-      'Введите корректный номер телефона, начинающийся с +7'
-   )
+  .string()
+  .required('Поле "Телефон" обязательно для заполнения')
+  .matches(phoneRegExp, "Введите корректный номер телефона, начинающийся с +7"),
 });
 
 // сам компонент
@@ -72,16 +69,9 @@ const ContactForm = () => {
     <TextInput
      placeholder="Название компании"
      size="lg"
-     styles={{
-      input: {
-       backgroundColor: "#1A2F4B",
-       color: "white",
-       borderColor: "#4ECDC4",
-       "&::placeholder": {
-        color: "grey",
-       },
-       borderRadius: "8px",
-      },
+     classNames={{
+      input:
+       "!bg-[#1A2F4B] !text-white !border-[#4ECDC4] !placeholder-gray !rounded-lg",
      }}
      {...register("companyName")}
      error={errors.companyName?.message}
@@ -89,16 +79,9 @@ const ContactForm = () => {
     <TextInput
      placeholder="Ваше имя"
      size="lg"
-     styles={{
-      input: {
-       backgroundColor: "#1A2F4B",
-       color: "white",
-       borderColor: "#4ECDC4",
-       "&::placeholder": {
-        color: "grey",
-       },
-       borderRadius: "8px",
-      },
+     classNames={{
+      input:
+       "!bg-[#1A2F4B] !text-white !border-[#4ECDC4] !placeholder-gray !rounded-lg",
      }}
      {...register("fullName")}
      error={errors.fullName?.message}
@@ -107,16 +90,9 @@ const ContactForm = () => {
      placeholder="Email"
      type="email"
      size="lg"
-     styles={{
-      input: {
-       backgroundColor: "#1A2F4B",
-       color: "white",
-       borderColor: "#4ECDC4",
-       "&::placeholder": {
-        color: "grey",
-       },
-       borderRadius: "8px",
-      },
+     classNames={{
+      input:
+       "!bg-[#1A2F4B] !text-white !border-[#4ECDC4] !placeholder-gray !rounded-lg",
      }}
      {...register("email")}
      error={errors.email?.message}
@@ -125,16 +101,9 @@ const ContactForm = () => {
      placeholder="Телефон"
      type="tel"
      size="lg"
-     styles={{
-      input: {
-       backgroundColor: "#1A2F4B",
-       color: "white",
-       borderColor: "#4ECDC4",
-       "&::placeholder": {
-        color: "grey",
-       },
-       borderRadius: "8px",
-      },
+     classNames={{
+      input:
+       "!bg-[#1A2F4B] !text-white !border-[#4ECDC4] !placeholder-gray !rounded-lg",
      }}
      {...register("phone")}
      error={errors.phone?.message}

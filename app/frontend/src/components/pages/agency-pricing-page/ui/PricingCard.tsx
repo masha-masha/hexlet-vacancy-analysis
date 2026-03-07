@@ -43,28 +43,26 @@ const PricingCard = (props: PricingCardProps) => {
   <Paper
    p="xl"
    radius="lg"
-   style={{
-    border: `1px solid ${cardBorderColor}`,
-    position: "relative",
-    display: "flex",
-    flex: 1,
-    minWidth: "280px",
-    maxWidth: "350px",
-    backgroundColor: "white",
-   }}
+   bg="white"
+   pos="relative"
+   display="flex"
+   flex={1}
+   miw={280}
+   maw={350}
+   bd={`1px solid ${cardBorderColor}`}
   >
    {popularPlan && (
     <Badge
-     color="#4ECDC4"
+     bg="#4ECDC4"
      variant="filled"
      radius="xl"
-     style={{
-      position: "absolute",
-      top: "-10px",
-      left: "50%",
-      transform: "translateX(-50%)",
-      padding: "10px",
-     }}
+     pos="absolute"
+     top="-10px"
+     left={0}
+     right={0}
+     mx="auto"
+     w="fit-content"
+     p="10px"
     >
      Популярный
     </Badge>
@@ -84,15 +82,10 @@ const PricingCard = (props: PricingCardProps) => {
      /{props.period}
     </Text>
 
-    <Stack
-     gap="xs"
-     mt="md"
-     w="100%"
-     style={{ flexGrow: 1, alignSelf: "stretch" }}
-    >
+    <Stack gap="xs" mt="md" w="100%" flex={1} align="stretch">
      {props.features.map((feature, index) => (
       <Group key={index} wrap="nowrap" align="flex-start" w="100%">
-       <ThemeIcon size="sm" radius="xl" color="#4ECDC4" variant="light">
+       <ThemeIcon size="sm" radius="xl" c="#4ECDC4" variant="light">
         <CheckCircleIcon />
        </ThemeIcon>
        <Text size="sm" c="dark">
@@ -105,9 +98,9 @@ const PricingCard = (props: PricingCardProps) => {
     <Button
      fullWidth
      mt="auto"
-     color={buttonBackGroundColor}
+     c={buttonColor}
+     bg={buttonBackGroundColor}
      radius="md"
-     style={{ color: buttonColor }}
     >
      Выбрать план
     </Button>

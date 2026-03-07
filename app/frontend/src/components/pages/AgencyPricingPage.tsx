@@ -1,12 +1,11 @@
 import { Provider } from "react-redux";
 import { useMemo } from "react";
-import { Alert, Text } from "@mantine/core";
+import { Alert, Text, Button } from "@mantine/core";
 import { Link } from "@inertiajs/react";
 
 import { setupStore } from "../../store/store";
 
 import AgencyPricingPage from "./agency-pricing-page/ui/AgencyPricingPage";
-
 
 type Features = {
  name: string;
@@ -26,8 +25,7 @@ type Props = {
  plans: Plan[];
 };
 
-const AgencyPricingPageWrapper = ( {plans} : Props) => {
-
+const AgencyPricingPageWrapper = ({ plans }: Props) => {
  const store = useMemo(() => {
   return setupStore({
    plans: {
@@ -38,11 +36,16 @@ const AgencyPricingPageWrapper = ( {plans} : Props) => {
 
  if (!plans) {
   return (
-   <Alert bg="red">
-    <Text>Что-то пошло не так.</Text>
-    <Link href="/foragencies" style={{ color: "white" }}>
+   <Alert bg="red" c="white">
+    <Text pl="18px">Что-то пошло не так.</Text>
+    <Button
+     component={Link}
+     href="/foragencies"
+     variant="transparent"
+     c="white"
+    >
      Пожалуйста, перезагрузите страницу.
-    </Link>
+    </Button>
    </Alert>
   );
  }
@@ -52,6 +55,6 @@ const AgencyPricingPageWrapper = ( {plans} : Props) => {
    <AgencyPricingPage />
   </Provider>
  );
-}
+};
 
 export default AgencyPricingPageWrapper;

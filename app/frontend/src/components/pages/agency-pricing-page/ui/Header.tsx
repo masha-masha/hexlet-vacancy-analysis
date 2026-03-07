@@ -1,25 +1,24 @@
-import { Group, Text, Anchor, ThemeIcon, Flex, rem, Box } from "@mantine/core";
+import { Group, Text, Anchor, ThemeIcon, Flex, rem } from "@mantine/core";
 import { ArrowTrendingUpIcon } from "@heroicons/react/16/solid";
 import { HomeIcon } from "@heroicons/react/24/outline";
 
 
 const Header = () => {
  return (
-  <Box
+  <Flex
    component="header"
    bg="#0A192F"
-   style={{
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    color: "white",
-    height: 60,
-    width: "100%",
-   }}
+   align="center"
+   justify="center"
+   c="white"
+   h={60}
+   w="100%"
   >
    <Group
     justify="space-between"
-    style={{ maxWidth: "1100px", width: "100%", padding: "0 1rem" }}
+    maw="1100px"
+    w="100%"
+    p="0 1rem"
    >
     <Flex align="center" gap="10px">
      <ThemeIcon color="#0A192F">
@@ -38,7 +37,7 @@ const Header = () => {
      </Flex>
     </Anchor>
    </Group>
-  </Box>
+  </Flex>
  );
 };
 

@@ -24,7 +24,7 @@ const PricingSection = () => {
     wrap="wrap"
     justify="center"
     align="stretch"
-    style={{ width: "100%" }}
+    w="100%"
    >
     {!plans && <Text> Нет доступных тарифов</Text>}
     {plans?.map((plan) => (

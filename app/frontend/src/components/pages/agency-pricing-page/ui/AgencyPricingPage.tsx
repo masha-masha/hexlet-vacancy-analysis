@@ -10,40 +10,28 @@ const AgencyPricingPage = () => {
  return (
   <>
    <Header />
-   <Box
-    style={{
-     backgroundColor: "white",
-     minHeight: "100vh",
-     display: "flex",
-     justifyContent: "center",
-     alignItems: "flex-start",
-     padding: "20px",
-     boxSizing: "border-box",
-    }}
-   >
-    <Stack style={{ maxWidth: "1140px", width: "100%" }}>
+   <Flex bg="white" mih="100vh" justify="center" align="flex-start" p={20}>
+    <Stack maw={1140} w="100%">
      <PricingSection />
      <Flex
       gap="xl"
       wrap="wrap"
       justify="center"
       align="flex-start"
-      style={{
-       backgroundColor: "#0A192F",
-       padding: "calc(2rem)",
-       borderRadius: "10px",
-       width: "100%",
-      }}
+      bg="#0A192F"
+      p="calc(2rem)"
+      bdrs={10}
+      w="100%"
      >
-      <Box style={{ flex: 1, minWidth: "350px" }}>
+      <Box flex={1} miw={350}>
        <BusinessAdvantages />
       </Box>
-      <Box style={{ flex: 1, minWidth: "350px" }}>
+      <Box flex={1} miw={350}>
        <ContactForm />
       </Box>
      </Flex>
     </Stack>
-   </Box>
+   </Flex>
   </>
  );
 };
