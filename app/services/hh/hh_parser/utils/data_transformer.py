@@ -26,7 +26,7 @@ def format_salary(salary_data: Optional[dict[str, Any]]) -> str:
     salary_from = salary_data.get("from")
     salary_to = salary_data.get("to")
 
-    def get_valid_salary_value(value) -> None | int:
+    def get_valid_salary_value(value) -> None | int | str:
         if value is None:
             return None
         try:
