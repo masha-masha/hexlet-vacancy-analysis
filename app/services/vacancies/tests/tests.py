@@ -52,7 +52,7 @@ class VacanciesTests(TransactionTestCase):
         view = VacancyListView()
         response = await view.get(request)
 
-        print(response)
+        self.assertIn(response, "Mocked Inertia Response")
 
     def test_vacancy_titles(self):
         titles = [v.title for v in Vacancy.objects.all()]
