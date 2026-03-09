@@ -1,6 +1,6 @@
 import logging
 import re
-from typing import Optional
+from typing import Any, Optional
 
 from bs4 import BeautifulSoup
 
@@ -18,7 +18,7 @@ def normalize_currency(currency: str) -> str:
     return currency
 
 
-def format_salary(salary_data: Optional[dict[str, any]]) -> str:
+def format_salary(salary_data: Optional[dict[str, Any]]) -> str:
     if not salary_data:
         return "По договоренности"
 
@@ -64,7 +64,7 @@ def extract_plain_text(html_content: Optional[str]) -> str:
     return BeautifulSoup(html_content, "html.parser").get_text()
 
 
-def safe_nested_get(data: Optional[dict[str, any]], *keys: str) -> any:
+def safe_nested_get(data: Optional[dict[str, Any]], *keys: str) -> Any:
     if not data:
         return None
 
@@ -79,7 +79,7 @@ def safe_nested_get(data: Optional[dict[str, any]], *keys: str) -> any:
     return current
 
 
-def transform_hh_data(item: dict[str, any]) -> dict[str, any]:
+def transform_hh_data(item: dict[str, Any]) -> dict[str, Any]:
     platform, _ = Platform.objects.get_or_create(name=Platform.HH)
     company = extract_company(item)
     city, full_address = extract_city_and_address(item.get("address"))
@@ -105,7 +105,7 @@ def transform_hh_data(item: dict[str, any]) -> dict[str, any]:
     }
 
 
-def extract_company(item: dict[str, any]) -> Optional[Company]:
+def extract_company(item: dict[str, Any]) -> Optional[Company]:
     employer_name = item.get("employer", {}).get("name")
     if not employer_name:
         return None
@@ -114,7 +114,7 @@ def extract_company(item: dict[str, any]) -> Optional[Company]:
 
 
 def extract_city_and_address(
-    address: Optional[dict[str, any]],
+    address: Optional[dict[str, Any]],
 ) -> tuple[Optional[City], Optional[str]]:
     if not address:
         return None, None
