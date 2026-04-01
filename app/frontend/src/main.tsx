@@ -3,6 +3,7 @@ import { createInertiaApp } from "@inertiajs/react";
 import { InertiaProgress } from '@inertiajs/progress';
 import { MantineProvider } from "@mantine/core";
 import '@mantine/core/styles.css';
+import "./index.css"
 import axios from 'axios';
 import React from 'react';
 

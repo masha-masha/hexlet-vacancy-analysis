@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 import os
+import sys
 from dotenv import load_dotenv
 from pathlib import Path
 import dj_database_url
@@ -44,16 +45,23 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django_vite",
+    "django.contrib.sitemaps",
     "inertia",
     "app.services.hh.hh_parser",
     "app.services.telegram.telegram_parser",
     "app.services.telegram.telegram_channels",
     "app.services.superjob.superjob_parser",
+    "app.services.auth.password_reset",
     "app.services.account",
-    "django_vite",
+    "app.homepage",
     "app.services.auth.tinkoff_id",
-    "app.services.pricing",
+    "app.services.parser",
+    "app.services.ai",
     "app.services.foragencies",
+    "app.services.pricing",
+    "app.services.vacancies",
+    "app.services.blog",
 ]
 
 AUTH_USER_MODEL = "users.User"
@@ -167,10 +175,10 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # Inertia (temporarily disabled; frontend will handle this later)
 
 AUTHENTICATION_BACKENDS = [
-    'app.services.auth.users.logic.authentication.EmailAuthBackend',
-    'app.services.auth.github.backend.GithubBackend',
-    'app.services.auth.yandex_id.backend.YandexBackend',
-    'django.contrib.auth.backends.ModelBackend',
+    "app.services.auth.users.logic.authentication.EmailAuthBackend",
+    "app.services.auth.github.backend.GithubBackend",
+    "app.services.auth.yandex_id.backend.YandexBackend",
+    "django.contrib.auth.backends.ModelBackend",
 ]
 
 EMAIL_BACKEND = os.environ.get(
@@ -188,13 +196,15 @@ EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER", "")
 EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD", "")
 EMAIL_TIMEOUT = int(os.environ.get("EMAIL_TIMEOUT", 10))
 
-YANDEX_CLIENT_ID = os.getenv('YANDEX_CLIENT_ID', '')
-YANDEX_CLIENT_SECRET = os.getenv('YANDEX_CLIENT_SECRET', '')
-YANDEX_REDIRECT_URI = os.getenv('YANDEX_REDIRECT_URI', '')
 
-GITHUB_CLIENT_ID = os.getenv('GITHUB_CLIENT_ID', '')
-GITHUB_CLIENT_SECRET = os.getenv('GITHUB_CLIENT_SECRET', '')
-GITHUB_REDIRECT_URI = os.getenv('GITHUB_REDIRECT_URI', '')
+FIXTURE_PATH = 'app/fixtures'
+YANDEX_CLIENT_ID = os.getenv("YANDEX_CLIENT_ID", "")
+YANDEX_CLIENT_SECRET = os.getenv("YANDEX_CLIENT_SECRET", "")
+YANDEX_REDIRECT_URI = os.getenv("YANDEX_REDIRECT_URI", "")
+
+GITHUB_CLIENT_ID = os.getenv("GITHUB_CLIENT_ID", "")
+GITHUB_CLIENT_SECRET = os.getenv("GITHUB_CLIENT_SECRET", "")
+GITHUB_REDIRECT_URI = os.getenv("GITHUB_REDIRECT_URI", "")
 
 ## django-vite settings
 # use HMR or not.
@@ -217,6 +227,16 @@ INERTIA_LAYOUT = BASE_DIR / "app" / "templates" / "index.html"
 CSRF_HEADER_NAME = "HTTP_X_XSRF_TOKEN"
 CSRF_COOKIE_NAME = "XSRF-TOKEN"
 
+# Password reset
+EMAIL_FOR_PASSWORD_RESET = os.environ.get("EMAIL_FOR_PASSWORD_RESET", "")
+PASSWORD_RESET_TIMEOUT = os.environ.get("PASSWORD_RESET_TIMEOUT", 3600)
+
+MAX_RETRIES_TO_SEND = os.environ.get("MAX_RETRIES_TO_SEND", 3)
+
+# Celery settings
+CELERY_BROKER_URL = os.getenv("CELERY_BROKER_URL", "redis://localhost:6379")
+CELERY_RESULT_BACKEND = os.getenv("CELERY_RESULT_BACKEND", "redis://localhost:6379")
+
 # Tinkoff ID settings
 TINKOFF_ID_CLIENT_ID = os.getenv("TINKOFF_ID_CLIENT_ID", "")
 TINKOFF_ID_CLIENT_SECRET = os.getenv("TINKOFF_ID_CLIENT_SECRET", "")
@@ -226,3 +246,57 @@ TINKOFF_ID_TOKEN_URL = "https://id.tinkoff.ru/auth/token"
 TINKOFF_ID_USERINFO_URL = "https://id.tinkoff.ru/userinfo/userinfo"
 TINKOFF_ID_INTROSPECT_URL = "https://id.tinkoff.ru/auth/introspect"
 TINKOFF_ID_SCOPE = ["profile", "email"]
+
+# AI settings
+AI_API_KEY = os.getenv("AI_API_KEY", "")
+AI_API_TIMEOUT = os.getenv("AI_API_TIMEOUT", 10)
+AI_API_MODEL = os.getenv("AI_API_MODEL", "")
+
+CHAT_MAX_HISTORY_LENGTH = os.getenv("CHAT_MAX_HISTORY_LENGTH", 10)
+
+# Logging
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "default": {
+            "format": "[{asctime}] {levelname} {name}:{lineno} {message}",
+            "style": "{",
+        },
+    },
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+            "stream": sys.stdout,
+            "formatter": "default",
+        },
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["console"],
+            "level": "INFO",
+            "propagate": False,
+        },
+
+        "django.request": {
+            "handlers": ["console"],
+            "level": "ERROR",
+            "propagate": False,
+        },
+
+        "django.db.backends": {
+            "handlers": ["console"],
+            "level": "DEBUG" if DEBUG else "WARNING",
+        },
+
+        "app": {
+            "handlers": ["console"],
+            "level": "DEBUG" if DEBUG else "INFO",
+            "propagate": False,
+        },
+    },
+    "root": {
+        "handlers": ["console"],
+        "level": "WARNING",
+    },
+}
