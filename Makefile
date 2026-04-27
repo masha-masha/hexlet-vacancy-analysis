@@ -27,7 +27,7 @@ install-backend:
 	uv sync --frozen
 
 install-frontend:
-	cd app/frontend && rm -rf node_modules package-lock.json && npm install
+	cd app/frontend && npm ci
 
 # Build
 build:
